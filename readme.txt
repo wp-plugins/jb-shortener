@@ -3,7 +3,7 @@ Contributors: betzster
 Tags: shorturl, twitter
 Requires at least: 3.1
 Tested up to: 3.2
-Stable tag: 0.4
+Stable tag: 0.5
 
 Changes the WordPress shorturl and Twitter Tools URL based on a base-36 encode of the post ID. Also includes materials to setup custom shorturl domain.
 
