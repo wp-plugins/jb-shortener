@@ -5,19 +5,20 @@ Requires at least: 3.1
 Tested up to: 3.2
 Stable tag: 0.5
 
-Changes the WordPress shorturl and Twitter Tools URL based on a base-36 encode of the post ID. Also includes materials to setup custom shorturl domain.
+Changes the Short URL and the Twitter Tools URL for each post on your site using a custom, shortened domain and a base-36 encode of the post ID.
 
 == Description ==
 
-This plugin modifies the default shorturl functionality by encoding the ID as base-36. Note: This plugin requires another, "short" domain and includes all files necessary for running that domain.
+This plugin modifies the default short-url functionality to work with a custom shortened domain that you own. It works fully with Twitter Tools, a popular plugin for automatically tweeting about new posts. If you have a twitter plugin that you think we should support, let us know. For the nerds: we're doing a base-36 encode of the post ID as the short-url for each post.
+
+*Note*: This plugin no longer requires external hosting of shortening scripts unless you're in a multisite environment.
 
 == Installation ==
 
 1. Buy a short domain
-2. Update short.domain/index.php with the real domain and upload it to your shortened domain.
-3. Upload `jb-shortener.php` to the `/wp-content/plugins/` directory
-4. Activate the plugin through the 'Plugins' menu in WordPress
-5. Update the "Short URL" in Options->General
+2. Upload `jb-shortener.php` to the `/wp-content/plugins/` directory
+3. Activate the plugin through the 'Plugins' menu in WordPress
+4. Update the "Short URL" in Options->General
 
 == Frequently Asked Questions ==
 
@@ -25,7 +26,14 @@ This plugin modifies the default shorturl functionality by encoding the ID as ba
 
 You can use a custom, shorter url for the short urls in WordPress and with Twitter Tools
 
+= Does it work with Multisite enabled? =
+
+In short, kinda. The plugin will still work, but you need to install the contents of short.domain itself. If you don't feel like that's possible, try to hold out for the version that works fully with multisite enabled.
+
 == Changelog ==
+
+= 0.5 =
+* No longer need to host the short-url redirect on an external domain for non-multisite installs
 
 = 0.4 =
 * First version
