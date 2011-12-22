@@ -3,7 +3,7 @@
 Plugin Name: JB Shortener
 Plugin URI: http://joshbetz.com/2011/11/jb-shortener/
 Description: Changes the WordPress shorturl and Twitter Tools URL based on a base-36 encode of the post ID. Also includes materials to setup custom shorturl domain.
-Version: 0.6
+Version: 0.7
 Author: Josh Betz
 Author URI: http://joshbetz.com
 */
@@ -63,14 +63,18 @@ function jb_redirect() {
   
 	  if (!empty($token)) {
 	    $id = base_convert(strip_tags($token), 36, 10);
-	    if(is_numeric($id)) {
-	      wp_redirect("$domain/?p=$id", 301);
+			$permalink = get_permalink($id);
+	    if($permalink) {
+	      wp_redirect("$permalink", 301);
 	      exit();
 	    }
 	  } else {
 	    wp_redirect("$domain/", 301);
 	    exit();
 	  }
+	  
+    wp_redirect("$domain/", 302);
+    exit();
 	}
 }
 
