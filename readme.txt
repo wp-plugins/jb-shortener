@@ -3,7 +3,7 @@ Contributors: betzster
 Tags: shorturl, twitter
 Requires at least: 3.1
 Tested up to: 3.3
-Stable tag: 0.6
+Stable tag: 0.7
 
 Changes the Short URL and the Twitter Tools URL for each post on your site using a custom, shortened domain and a base-36 encode of the post ID.
 
@@ -31,6 +31,9 @@ You can use a custom, shorter url for the short urls in WordPress and with Twitt
 In short, kinda. The plugin will still work, but you need to install the contents of short.domain itself. If you don't feel like that's possible, try to hold out for the version that works fully with multisite enabled.
 
 == Changelog ==
+
+= 0.7 =
+* Straight redirect to post instead of bouncing to `?p=POSTID` first
 
 = 0.5 =
 * No longer need to host the short-url redirect on an external domain for non-multisite installs
