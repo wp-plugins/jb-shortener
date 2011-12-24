@@ -3,7 +3,7 @@ Contributors: betzster
 Tags: shorturl, twitter
 Requires at least: 3.3
 Tested up to: 3.3
-Stable tag: 0.8
+Stable tag: 0.9
 
 Changes the Short URL and the Twitter Tools URL for each post on your site using a custom, shortened domain and a base-36 encode of the post ID.
 
