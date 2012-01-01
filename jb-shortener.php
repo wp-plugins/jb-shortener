@@ -3,7 +3,7 @@
 Plugin Name: JB Shortener
 Plugin URI: http://joshbetz.com/2011/11/jb-shortener/
 Description: Changes the WordPress shorturl and Twitter Tools URL based on a base-36 encode of the post ID. Also includes materials to setup custom shorturl domain.
-Version: 0.9
+Version: 1.0
 Author: Josh Betz
 Author URI: http://joshbetz.com
 */
@@ -77,27 +77,40 @@ function jb_redirect() {
 }
 
 if( is_multisite() ) {
-  add_action('admin_init', 'jb_maybe_create_db');
+  register_activation_hook( __FILE__, 'jb_maybe_create_db' );
   function jb_maybe_create_db() {
   	global $wpdb;
 
   	$wpdb->jbtable = $wpdb->base_prefix . 'jb_shortlinks';
   	if ( is_super_admin() || is_site_admin() ) {
-  		$created = 0;
   		if ( $wpdb->get_var("SHOW TABLES LIKE '{$wpdb->jbtable}'") != $wpdb->jbtable ) {
-  			$wpdb->query( "CREATE TABLE IF NOT EXISTS `{$wpdb->jbtable}` (
+  			$created = $wpdb->query( "CREATE TABLE IF NOT EXISTS `{$wpdb->jbtable}` (
   				`id` bigint(20) NOT NULL auto_increment,
   				`blog_id` bigint(20) NOT NULL,
   				`domain` varchar(255) NOT NULL,
   				PRIMARY KEY  (`id`),
   				KEY `blog_id` (`blog_id`,`domain`)
   			);" );
-  			$created = 1;
-  		}
-  		if ( $created ) {
-  			?> <div id="message" class="updated fade"><p><strong>Shortlink database table created</strong></p></div> <?php
+    		if ( $created ) {
+    			'<div id="message" class="updated fade"><p><strong>Shortlink database table created</strong></p></div>';
+    		}
   		}
   	}
+  }
+  
+  register_deactivation_hook( __FILE__, 'jb_delete_db_entry' );
+  function jb_delete_db_entry() {
+    global $wpdb;
+    
+    $blog_id = get_current_blog_id();
+    $wpdb->jbtable = $wpdb->base_prefix . 'jb_shortlinks';
+    if( is_super_admin() || is_site_admin() ) {
+      $where = $wpdb->prepare( 'blog_id = %s', $blog_id );  
+      $deleted = $wpdb->query( "DELETE FROM {$wpdb->jbtable} WHERE {$where} LIMIT 1" );
+      if( $deleted ) {
+        echo '<div id="message" class="updated fade"><p><strong>Shortlinks plugin has been disabled</strong></p></div>';
+      } 
+    }
   }
 }
 
