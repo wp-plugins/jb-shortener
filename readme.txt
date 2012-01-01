@@ -3,7 +3,7 @@ Contributors: betzster
 Tags: shorturl, twitter
 Requires at least: 3.3
 Tested up to: 3.3
-Stable tag: 0.9
+Stable tag: 1.0
 
 Changes the Short URL and the Twitter Tools URL for each post on your site using a custom, shortened domain and a base-36 encode of the post ID.
 
@@ -33,6 +33,11 @@ You can use a custom, shorter url for the short urls in WordPress and with Twitt
 Yes, but you have to copy the `sunrise.php` file into the `wp_content` folder.
 
 == Changelog ==
+
+= 1.0 =
+* Removes entries from the redirect database in multisite mode
+* No longer continues to redirect after plugin has been disabled in multisite mode
+* more efficient check for database install
 
 = 0.8 =
 * No longer requires hosting of short-url redirect scripts, even for multisite
