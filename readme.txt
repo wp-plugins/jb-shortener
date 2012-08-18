@@ -2,16 +2,14 @@
 Contributors: betzster
 Tags: shorturl, twitter
 Requires at least: 3.3
-Tested up to: 3.3
-Stable tag: 1.0
+Tested up to: 3.4.1
+Stable tag: 1.1
 
 Changes the Short URL and the Twitter Tools URL for each post on your site using a custom, shortened domain and a base-36 encode of the post ID.
 
 == Description ==
 
-This plugin modifies the default short-url functionality to work with a custom shortened domain that you own. It works fully with Twitter Tools, a popular plugin for automatically tweeting about new posts. If you have a twitter plugin that you think we should support, let us know. For the nerds: we're doing a base-36 encode of the post ID as the short-url for each post.
-
-*Note*: This plugin no longer requires external hosting of shortening scripts.
+Changes the Short URL and the Twitter Tools URL for each post on your site using a custom, shortened domain and a base-36 encode of the post ID.
 
 == Installation ==
 
@@ -20,7 +18,7 @@ This plugin modifies the default short-url functionality to work with a custom s
 3. Activate the plugin through the 'Plugins' menu in WordPress
 4. Update the "Short URL" in Options->General
 
-If you're running a multisite configuration, copy `sunrise.php` to the `wp-content` folder. If you're running the multisite domain mapping plugin and already have a file called `sunrise.php`, rename it to `dm_sunrise.php`.
+If you're running a multisite configuration, copy `sunrise.php` to the `wp-content` folder and set `define('SUNRISE', 'on');` in `wp-config.php`.
 
 == Frequently Asked Questions ==
 
@@ -33,6 +31,11 @@ You can use a custom, shorter url for the short urls in WordPress and with Twitt
 Yes, but you have to copy the `sunrise.php` file into the `wp_content` folder.
 
 == Changelog ==
+
+= 1.1 =
+* Now works with multisite installs with subdirectories
+* Various optimizations
+* Removed explicit support for domain mapping plugin
 
 = 1.0 =
 * Removes entries from the redirect database in multisite mode
