@@ -3,7 +3,7 @@ Contributors: betzster
 Tags: shorturl, twitter
 Requires at least: 3.3
 Tested up to: 3.4.1
-Stable tag: 1.1
+Stable tag: 1.1.1
 
 Changes the Short URL and the Twitter Tools URL for each post on your site using a custom, shortened domain and a base-36 encode of the post ID.
 
@@ -31,6 +31,10 @@ You can use a custom, shorter url for the short urls in WordPress and with Twitt
 Yes, but you have to copy the `sunrise.php` file into the `wp_content` folder.
 
 == Changelog ==
+
+= 1.1.1 =
+* Fix formatting on options page
+* Display warning if no short domain is set
 
 = 1.1 =
 * Now works with multisite installs with subdirectories

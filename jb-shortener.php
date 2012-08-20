@@ -3,7 +3,7 @@
 Plugin Name: JB Shortener
 Plugin URI: http://joshbetz.com/2011/11/jb-shortener/
 Description: Changes the WordPress shorturl and Twitter Tools URL based on a base-36 encode of the post ID. Also includes materials to setup custom shorturl domain.
-Version: 1.1
+Version: 1.1.1
 Author: Josh Betz
 Author URI: http://joshbetz.com
 */
@@ -14,6 +14,7 @@ class JB_Shortlinks {
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'init', array( $this, 'jb_redirect' ), 1 );
 		add_action( 'admin_init', array( $this, 'jb_shorturl_settings' ) );
+		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		if ( is_multisite() ) {
 			register_activation_hook( __FILE__, array( $this, 'jb_maybe_create_db' ) );
 			register_deactivation_hook( __FILE__, array( $this, 'jb_delete_db_entry' ) );
@@ -91,7 +92,7 @@ class JB_Shortlinks {
 	 * Output a field to define the short domain
 	 */
 	function jb_settings_callback() {
-		echo '<input name="jb_shorturl" id="jb_shorturl" type="text" value="' . $this->get_jb_shorturl() . '" class="code regular-text"> <span class="description">The custom short url for your site</span>';
+		echo '<input name="jb_shorturl" id="jb_shorturl" type="text" value="' . $this->get_jb_shorturl() . '" class="code regular-text"><p class="description">The custom short url for your site</p>';
 	}
 
 	/**
@@ -173,6 +174,13 @@ class JB_Shortlinks {
 				echo '<div id="message" class="updated fade"><p><strong>Shortlinks plugin has been disabled</strong></p></div>';
 			} 
 		}
+	}
+
+	function admin_notices(){
+		if ( get_option( 'jb_shorturl' ) == '' )
+			echo '<div class="updated">
+				<p>No short domain has been specified.</p>
+			</div>';
 	}
 
 	/**
